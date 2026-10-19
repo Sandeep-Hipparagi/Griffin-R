@@ -1,0 +1,9 @@
+# Normalize line endings to LF on commit, checkout as-is
+* text=auto eol=lf
+
+# Force binary — never mangle
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
+package-lock.json -diff

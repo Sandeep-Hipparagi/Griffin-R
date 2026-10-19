@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Modern modal backdrop scroll lock ── */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* ── Custom scrollbars ── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27364a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f526b;
+}
+
+/* ── Micro-animation: zoom-in-75 (for status pills) ── */
+@keyframes zoom-in-75 {
+  from { opacity: 0; transform: scale(0.75); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-in.zoom-in-75 {
+  animation: zoom-in-75 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ── Modal scale-in ── */
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-animate-in {
+  animation: modal-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Glow pulse ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(99, 102, 241, 0.2); }
+  50%       { box-shadow: 0 0 28px rgba(99, 102, 241, 0.4); }
+}
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ── Fade-up for field pop-in ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out forwards;
+}
+
+@layer base {
+  :where(button, a, summary, input, textarea):focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 3px;
+  }
+  button { touch-action: manipulation; }
+  button:disabled { cursor: not-allowed; opacity: 0.5; }
+  button:not(:disabled):active { transform: translateY(1px); }
+  input, textarea { min-width: 0; }
+}
+
+/* Keep audio-driven bar heights independent of surrounding layout transitions. */
+.interview-visualizer {
+  --lk-va-bar-width: 5px;
+  --lk-va-bar-gap: 5px;
+  --lk-fg: #818cf8;
+  height: 40px;
+  min-height: 40px;
+  contain: layout;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
