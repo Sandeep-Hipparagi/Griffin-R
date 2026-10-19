@@ -357,7 +357,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="button"
                 disabled={isSubmitted || !editedForm.project_name?.trim() || !editedForm.personal_ownership?.trim() || !editedForm.impact_metrics?.trim()}
                 onClick={handleApproveAndSubmit}
-                className="flex justify-center items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 active:from-indigo-700 active:to-violet-700 text-white text-xs font-bold shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/35 transition-all duration-200"
+                className="flex justify-center items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 active:from-indigo-700 active:to-violet-700 text-white text-xs font-bold shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/35 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:from-indigo-600 disabled:hover:to-violet-600"
               >
                 <Send className="w-3.5 h-3.5 shrink-0" />
                 Approve & Submit Application

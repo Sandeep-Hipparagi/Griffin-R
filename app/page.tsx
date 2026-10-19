@@ -153,14 +153,16 @@ export default function Home() {
   const handleFormUpdate = useCallback((updated: Partial<ApplicationFormState>) => {
     setForm((prev) => {
       const next = { ...prev, ...updated };
-      // If all 3 fields are present, mark ready_for_review
-      if (
-        next.project_name &&
-        next.personal_ownership &&
-        next.impact_metrics &&
-        next.ready_for_review === undefined
-      ) {
-        next.ready_for_review = true;
+      // If ready_for_review was not explicitly set in the incoming update,
+      // dynamically evaluate whether all three fields meet validation criteria
+      if (updated.ready_for_review === undefined) {
+        const isProjectValid = Boolean(next.project_name && next.project_name.trim().length >= 3);
+        const isOwnershipValid = Boolean(next.personal_ownership && next.personal_ownership.trim().length >= 8);
+        const isMetricsValid = Boolean(next.impact_metrics && next.impact_metrics.trim().length >= 4);
+
+        if (isProjectValid && isOwnershipValid && isMetricsValid) {
+          next.ready_for_review = true;
+        }
       }
       return next;
     });
